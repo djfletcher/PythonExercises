@@ -6,10 +6,10 @@ def bubblesort(lst):
                 dup[j], dup[j + 1] = dup[j + 1], dup[j]
     return dup
 
-print('# Bubblesort')
-print(bubblesort([4,6,1,88,3]) == [1,3,4,6,88])
-print(bubblesort([4,3,2,1]) == [1,2,3,4])
-print(bubblesort([1,2,3]) == [1,2,3])
+print '# Bubblesort'
+print bubblesort([4,6,1,88,3]) == [1,3,4,6,88]
+print bubblesort([4,3,2,1]) == [1,2,3,4]
+print bubblesort([1,2,3]) == [1,2,3]
 
 
 def quicksort(lst):
@@ -32,10 +32,10 @@ def quicksort(lst):
     return quicksort(left) + [lst[pivot]] + quicksort(right)
 
 
-print('# Quicksort')
-print(quicksort([4,6,1,88,3]) == [1,3,4,6,88])
-print(quicksort([4,3,2,1]) == [1,2,3,4])
-print(quicksort([1,2,3]) == [1,2,3])
+print '# Quicksort'
+print quicksort([4,6,1,88,3]) == [1,3,4,6,88]
+print quicksort([4,3,2,1]) == [1,2,3,4]
+print quicksort([1,2,3]) == [1,2,3]
 
 
 
@@ -63,7 +63,30 @@ def merge(left, right):
     return merged + left + right
 
 
-print('# Mergesort')
-print(mergesort([4,6,1,88,3]) == [1,3,4,6,88])
-print(mergesort([4,3,2,1]) == [1,2,3,4])
-print(mergesort([1,2,3]) == [1,2,3])
+print '# Mergesort'
+print mergesort([4,6,1,88,3]) == [1,3,4,6,88]
+print mergesort([4,3,2,1]) == [1,2,3,4]
+print mergesort([1,2,3]) == [1,2,3]
+
+
+
+def bsearch(lst, target):
+    if not lst:
+        return None
+
+    pivot = len(lst) / 2
+
+    if lst[pivot] < target:
+        return bsearch(lst[:pivot], target)
+    elif lst[pivot] == target:
+        return pivot
+    else:
+        result = bsearch(lst[pivot + 1:], target)
+        return None if not result else result + 1
+
+
+print '# Binary Search'
+print bsearch([1,2,3,4,5,6,7,8,9,10], 4) == 3
+print bsearch([1,2,3,4,5,6,7,8,9,10], -2) == None
+print bsearch([1,2,3,4,5,6,7,8,9,10], 11) == None
+print bsearch([1,2,3,4,5,6,7,8,9,10], 10) == 9
