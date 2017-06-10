@@ -36,3 +36,34 @@ print('# Quicksort')
 print(quicksort([4,6,1,88,3]) == [1,3,4,6,88])
 print(quicksort([4,3,2,1]) == [1,2,3,4])
 print(quicksort([1,2,3]) == [1,2,3])
+
+
+
+def mergesort(lst):
+    if len(lst) <= 1:
+        return lst
+    pivot = len(lst) / 2
+
+    left = mergesort(lst[:pivot])
+    right = mergesort(lst[pivot:])
+
+    return merge(left, right)
+
+def merge(left, right):
+    merged = []
+    switch = {
+        -1: lambda: merged.append(left.pop(0)),
+        0: lambda: merged.append(left.pop(0)),
+        1: lambda: merged.append(right.pop(0))
+    }
+
+    while left and right:
+        switch[cmp(left[0], right[0])]()
+
+    return merged + left + right
+
+
+print('# Mergesort')
+print(mergesort([4,6,1,88,3]) == [1,3,4,6,88])
+print(mergesort([4,3,2,1]) == [1,2,3,4])
+print(mergesort([1,2,3]) == [1,2,3])
