@@ -29,3 +29,44 @@ def checkBST(root, mini=None, maxi=None):
     if mini and mini >= root.data or maxi and maxi <= root.data:
         return False
     return checkBST(root.left, mini, root.data) and checkBST(root.right, root.data, maxi)
+
+
+
+def  degreeOfArray(arr):
+# Iterate through array and keep count of how many times each element appears, using a dict
+# Dict should point to another dict with three keys:
+    # 1. Count
+    # 2. First Index
+    # 3. Last Index
+    memo = {}
+    for idx, element in enumerate(arr):
+        memoize(element, idx, memo)
+    degree = 0
+    minimum_length = float('inf')
+    for element in memo:
+        count = memo[element]['count']
+        subarray_length = memo[element]['last_idx'] + 1 - memo[element]['first_idx']
+        print("num: {}, count: {}, sub_length: {}".format(element, count, subarray_length))
+        if count >= degree and subarray_length < minimum_length:
+            degree = count
+            minimum_length = subarray_length
+    return minimum_length
+
+
+
+def memoize(element, idx, memo):
+    if element not in memo:
+        memo[element] = {
+            'count': 1,
+            'first_idx': idx,
+            'last_idx': idx
+        }
+    else:
+        memo[element]['count'] += 1
+        memo[element]['last_idx'] = idx
+
+# a = [1,1,2,3,2]
+# m = {}
+# for idx, val in enumerate(a):
+#     memoize(val, idx, m)
+# print(m)
