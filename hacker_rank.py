@@ -70,3 +70,27 @@ def memoize(element, idx, memo):
 # for idx, val in enumerate(a):
 #     memoize(val, idx, m)
 # print(m)
+
+
+def searchNodes(root, target, hops=0):
+# modified DFS:
+    if root is None:
+        return None
+    # 1. check if root's val is target; if so return hops
+    if root.value == target:
+        return hops
+    # 2. if not, then check if root's val is greater than target; if so, return hops (or None)
+    elif root.value > target:
+        return None
+    # 3. if not, then recurse on right and below nodes.
+    else:
+        next_result = searchNodes(root.next, target, hops + 1)
+        below_result = searchNodes(root.below, target, hops + 1)
+        if next_result is None and below_result is None:
+            return hops
+        elif next_result is None:
+            return below_result
+        elif below_result is None:
+            return next_result
+        else:
+            return next_result if next_result < below_result else below_result
