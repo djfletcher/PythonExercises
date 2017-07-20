@@ -65,11 +65,7 @@ def memoize(element, idx, memo):
         memo[element]['count'] += 1
         memo[element]['last_idx'] = idx
 
-# a = [1,1,2,3,2]
-# m = {}
-# for idx, val in enumerate(a):
-#     memoize(val, idx, m)
-# print(m)
+
 
 
 def searchNodes(root, target, hops=0):
@@ -94,3 +90,24 @@ def searchNodes(root, target, hops=0):
             return next_result
         else:
             return next_result if next_result < below_result else below_result
+
+
+
+# Detect a cycle in a linked list. Note that the head pointer may be 'None' if the list is empty.
+#
+# A Node is defined as:
+#
+#     class Node(object):
+#         def __init__(self, data = None, next_node = None):
+#             self.data = data
+#             self.next = next_node
+
+def has_cycle(head):
+    seen = set()
+    node = head
+    while node.next:
+        if node in seen:
+            return True
+        seen.add(node)
+        node = node.next
+    return False
