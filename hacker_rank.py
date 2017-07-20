@@ -111,3 +111,22 @@ def has_cycle(head):
         seen.add(node)
         node = node.next
     return False
+
+
+# Source: https://www.hackerrank.com/challenges/ctci-balanced-brackets
+def is_matched(expression):
+    stack = []
+    for char in expression:
+        if char == '(':
+            stack.append(')')
+        elif char == '{':
+            stack.append('}')
+        elif char == '[':
+            stack.append(']')
+        else:
+            if len(stack) == 0 or stack.pop(-1) != char:
+                return False
+    return len(stack) == 0
+
+a = []
+print(a.pop(-1))
