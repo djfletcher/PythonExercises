@@ -23,12 +23,16 @@ def ransom_note(magazine, ransom):
 #         self.left = None
 #         self.right = None
 # Given a root node, check whether it is a valid Binary Search Tree
-def checkBST(root, mini=None, maxi=None):
-    if not root or not root.left and not root.right:
+def check(root, min, max):
+    if root is None:
         return True
-    if mini and mini >= root.data or maxi and maxi <= root.data:
+    elif root.data <= min or root.data >= max:
         return False
-    return checkBST(root.left, mini, root.data) and checkBST(root.right, root.data, maxi)
+    else:
+        return check(root.left, min, root.data) and check(root.right, root.data, max)
+
+def checkBST(root):
+    return check(root, float('-inf'), float('inf'))
 
 
 
