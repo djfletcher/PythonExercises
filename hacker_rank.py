@@ -140,12 +140,27 @@ print(a.pop(-1))
 # Source: https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks
 class MyQueue(object):
     def __init__(self):
-        
+        self.stack1 = []
+        self.stack2 = []
 
     def peek(self):
-
+        if len(self.stack2) == 0:
+            while len(self.stack1) > 0:
+                self.stack2.append(self.stack1.pop(-1))
+        try:
+            return self.stack2[-1]
+        except IndexError:
+            return None
 
     def pop(self):
+        if len(self.stack2) == 0:
+            while len(self.stack1) > 0:
+                self.stack2.append(self.stack1.pop(-1))
+        try:
+            return self.stack2.pop(-1)
+        except IndexError:
+            return None
 
 
     def put(self, value):
+        self.stack1.append(value)
