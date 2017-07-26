@@ -134,3 +134,18 @@ def is_matched(expression):
 
 a = []
 print(a.pop(-1))
+
+
+
+# Source: https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks
+class MyQueue(object):
+    def __init__(self):
+        
+
+    def peek(self):
+
+
+    def pop(self):
+
+
+    def put(self, value):
