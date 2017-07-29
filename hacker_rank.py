@@ -132,10 +132,6 @@ def is_matched(expression):
                 return False
     return len(stack) == 0
 
-a = []
-print(a.pop(-1))
-
-
 
 # Source: https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks
 class MyQueue(object):
@@ -164,3 +160,14 @@ class MyQueue(object):
 
     def put(self, value):
         self.stack1.append(value)
+
+# Source: https://www.hackerrank.com/challenges/ctci-coin-change/problem
+def make_change(target, coins):
+    combos = [1] + [0] * target
+    for coin in coins:
+        for i in range(1, target + 1):
+            if coin <= i:
+                combos[i] += combos[i - coin]
+    return combos[target]
+
+print(make_change(10, [5, 3, 2, 6]) == 5)
