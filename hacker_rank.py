@@ -170,4 +170,20 @@ def make_change(target, coins):
                 combos[i] += combos[i - coin]
     return combos[target]
 
-print(make_change(10, [5, 3, 2, 6]) == 5)
+# print(make_change(10, [5, 3, 2, 6]) == 5)
+
+
+# Source: https://www.hackerrank.com/challenges/ctci-contacts
+class Contacts(object):
+    def __init__(self):
+        super(Contacts, self).__init__()
+        self.trie = {}
+
+    def add_name(self, name):
+        contacts = self.trie
+        for char in name:
+            if char not in contacts:
+                contacts[char] = {}
+            contacts = contacts[char]
+        contacts['$'] = True
+        return name
