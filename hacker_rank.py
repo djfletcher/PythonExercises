@@ -174,12 +174,14 @@ def make_change(target, coins):
 
 
 # Source: https://www.hackerrank.com/challenges/ctci-contacts
+from queue import Queue
+
 class Contacts(object):
     def __init__(self):
         super(Contacts, self).__init__()
         self.trie = {}
 
-    def add_name(self, name):
+    def add(self, name):
         contacts = self.trie
         for char in name:
             if char not in contacts:
@@ -187,3 +189,25 @@ class Contacts(object):
             contacts = contacts[char]
         contacts['$'] = True
         return name
+
+    def find(self, partial):
+        matches = 0
+        contacts = self.trie
+        for char in partial:
+            if char not in contacts:
+                return 0
+            contacts = contacts[char]
+        return self.count(contacts)
+
+    def count(self, contacts):
+        count = 0
+        q = Queue()
+        q.put(contacts)
+        while not q.empty():
+            contacts = q.get()
+            for char in contacts:
+                if char == '$':
+                    count += 1
+                else:
+                    q.put(contacts[char])
+        return count
