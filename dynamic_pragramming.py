@@ -82,3 +82,64 @@ print(max_submatrix(test2) == 3)
 print(max_submatrix(test3) == 2)
 print(max_submatrix(test4) == 0)
 print(max_submatrix(test5) == 1)
+
+
+
+def print_spiral(matrix):
+    # set top, right, bottom, and left boundaries to zero and length of matrix
+    # peel off each layer, breaking if there are no layers left, and
+    # readjust the boundaries, moving them in each time
+    top, left, bottom, right = 0, 0, len(matrix) - 1, len(matrix[0]) - 1
+    result = []
+    while len(result) < len(matrix) * len(matrix[0]):
+        # top
+        if bottom < top:
+            break
+        for col in range(left, right + 1):
+            result.append(matrix[top][col])
+        top += 1
+
+        # right
+        if right < left:
+            break
+        for row in range(top, bottom + 1):
+            result.append(matrix[row][right])
+        right -= 1
+
+        # bottom
+        if bottom < top:
+            break
+        for col in range(right, left - 1, -1):
+            result.append(matrix[bottom][col])
+        bottom -= 1
+
+        # left
+        if right < left:
+            break
+        for row in range(bottom, top - 1, -1):
+            result.append(matrix[row][left])
+        left += 1
+    return result
+
+test1 = [
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+
+test2 = [
+  [1,  2,  3,  4,  5,  6],
+  [7,  8,  9,  10, 11, 12],
+  [13, 14, 15, 16, 17, 18]
+]
+
+test3 = [
+  [ 1, 2, 3, 4 ],
+  [ 5, 6, 7, 8 ],
+  [ 9, 10, 11, 12 ],
+  [ 13, 14, 15, 16 ]
+]
+
+print(print_spiral(test1) == [1, 2, 3, 6, 9, 8, 7, 4, 5])
+print(print_spiral(test2) == [1, 2, 3, 4, 5, 6, 12, 18, 17, 16, 15, 14, 13, 7, 8, 9, 10, 11])
+print(print_spiral(test3) == [1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10])
